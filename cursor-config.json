@@ -1,0 +1,11 @@
+{
+  "mcp": {
+    "servers": {
+      "documentation": {
+        "command": "node",
+        "args": ["/Users/dipgupta/Documents/projects/test-mcp/build/index.js"],
+        "env": {}
+      }
+    }
+  }
+} 
