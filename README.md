@@ -2,6 +2,18 @@
 
 A Model Context Protocol (MCP) server that provides seamless integration between your documentation and Cursor IDE, allowing AI assistants to access and search through both **local and online documentation** in real-time.
 
+## 📦 Installation
+
+```bash
+# Install globally (recommended)
+npm install -g @dpanshug/mcp-docs
+
+# Or install locally in your project
+npm install @dpanshug/mcp-docs
+```
+
+After installation, the `mcp-docs` command will be available globally.
+
 ## Features
 
 - 🔍 **Real-time search**: Search through all documentation files using natural language queries

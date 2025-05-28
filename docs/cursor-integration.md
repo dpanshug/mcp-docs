@@ -58,7 +58,7 @@ Add to your Cursor settings file (`~/.cursor/config/settings.json`):
 
 ```bash
 # Install globally via npm
-npm install -g mcp-docs
+npm install -g @dpanshug/mcp-docs
 
 # Or clone and build for development
 git clone https://github.com/dpanshug/mcp-docs.git

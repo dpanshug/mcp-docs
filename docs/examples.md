@@ -8,6 +8,13 @@ tags: [examples, use-cases]
 
 This document provides practical examples of how to use the MCP Docs server with Cursor.
 
+## Installation
+
+First, install the MCP server:
+```bash
+npm install -g @dpanshug/mcp-docs
+```
+
 ## Basic Search Examples
 
 ### Finding Setup Instructions
