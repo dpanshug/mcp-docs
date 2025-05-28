@@ -34,10 +34,10 @@ A Model Context Protocol (MCP) server that provides seamless integration between
 
 ```bash
 # Install globally
-npm install -g mcp-docs
+npm install -g @dpanshug/mcp-docs
 
 # Or install locally in your project
-npm install mcp-docs
+npm install @dpanshug/mcp-docs
 ```
 
 ### Option 2: Clone and Build (For Development)
@@ -96,7 +96,7 @@ Add the following to your Cursor settings (usually found in `~/.cursor/config/se
     "servers": {
       "documentation": {
         "command": "node",
-        "args": ["./node_modules/mcp-docs/build/index.js"],
+        "args": ["./node_modules/@dpanshug/mcp-docs/build/index.js"],
         "env": {}
       }
     }

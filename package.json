@@ -1,5 +1,5 @@
 {
-  "name": "mcp-docs",
+  "name": "@dpanshug/mcp-docs",
   "version": "1.0.0",
   "description": "MCP server for documentation integration with Cursor IDE - supports local and online documentation with real-time search",
   "main": "build/index.js",
