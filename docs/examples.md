@@ -1,12 +1,12 @@
 ---
 title: Examples
-description: Practical examples of using the documentation MCP server
+description: Practical examples of using the MCP Docs server
 tags: [examples, use-cases]
 ---
 
 # Examples
 
-This document provides practical examples of how to use the documentation MCP server with Cursor.
+This document provides practical examples of how to use the MCP Docs server with Cursor.
 
 ## Basic Search Examples
 

@@ -40,7 +40,7 @@ class MCPServerTester {
 
       this.serverProcess.stderr.on('data', (data) => {
         const message = data.toString().trim();
-        if (message.includes('Documentation MCP server running on stdio')) {
+        if (message.includes('MCP Docs server running on stdio')) {
           this.log('Server started successfully', 'SUCCESS');
           serverReady = true;
           resolve();

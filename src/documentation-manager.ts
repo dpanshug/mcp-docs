@@ -153,7 +153,7 @@ export class DocumentationManager {
       
       const response = await fetch(source.url, {
         headers: {
-          'User-Agent': 'Documentation-MCP-Server/1.0'
+          'User-Agent': 'MCP-Docs/1.0'
         }
       });
 

@@ -1,4 +1,4 @@
-# Documentation MCP Server
+# MCP Docs
 
 A Model Context Protocol (MCP) server that provides seamless integration between your documentation and Cursor IDE, allowing AI assistants to access and search through both **local and online documentation** in real-time.
 
@@ -30,22 +30,51 @@ A Model Context Protocol (MCP) server that provides seamless integration between
 
 ## Quick Start
 
-### 1. Install Dependencies
+### Option 1: Install from npm (Recommended)
 
 ```bash
-npm install
+# Install globally
+npm install -g mcp-docs
+
+# Or install locally in your project
+npm install mcp-docs
 ```
 
-### 2. Build the Server
+### Option 2: Clone and Build (For Development)
 
 ```bash
+# Clone the repository
+git clone https://github.com/dpanshug/mcp-docs.git
+cd mcp-docs
+
+# Install dependencies
+npm install
+
+# Build the server
 npm run build
 ```
 
-### 3. Configure Cursor
+## Configuration
+
+### Configure Cursor
 
 Add the following to your Cursor settings (usually found in `~/.cursor/config/settings.json`):
 
+#### If installed globally via npm:
+```json
+{
+  "mcp": {
+    "servers": {
+      "documentation": {
+        "command": "mcp-docs",
+        "env": {}
+      }
+    }
+  }
+}
+```
+
+#### If cloned/built locally:
 ```json
 {
   "mcp": {
@@ -60,7 +89,22 @@ Add the following to your Cursor settings (usually found in `~/.cursor/config/se
 }
 ```
 
-### 4. Start Using
+#### If installed locally in your project:
+```json
+{
+  "mcp": {
+    "servers": {
+      "documentation": {
+        "command": "node",
+        "args": ["./node_modules/mcp-docs/build/index.js"],
+        "env": {}
+      }
+    }
+  }
+}
+```
+
+### Start Using
 
 Once configured, you can use these capabilities in Cursor:
 

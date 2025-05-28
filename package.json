@@ -1,14 +1,24 @@
 {
-  "name": "documentation-mcp-server",
+  "name": "mcp-docs",
   "version": "1.0.0",
-  "description": "MCP server for documentation integration with Cursor",
+  "description": "MCP server for documentation integration with Cursor IDE - supports local and online documentation with real-time search",
   "main": "build/index.js",
   "type": "module",
+  "bin": {
+    "mcp-docs": "./build/index.js"
+  },
+  "files": [
+    "build/**/*",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
     "start": "node build/index.js",
     "dev": "tsx src/index.ts",
-    "test": "npm run build && node test-mcp-server.js"
+    "test": "npm run build && node test-mcp-server.js",
+    "prepublishOnly": "npm run build",
+    "prepack": "npm run build"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^0.6.0",
@@ -28,7 +38,28 @@
     "typescript": "^5.6.0",
     "tsx": "^4.19.2"
   },
-  "keywords": ["mcp", "documentation", "cursor", "ai"],
-  "author": "Your Name",
-  "license": "MIT"
+  "keywords": [
+    "mcp",
+    "documentation", 
+    "cursor",
+    "ai",
+    "model-context-protocol",
+    "search",
+    "docs",
+    "markdown",
+    "online-docs"
+  ],
+  "author": "Dipanshu Gupta",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dpanshug/mcp-docs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dpanshug/mcp-docs/issues"
+  },
+  "homepage": "https://github.com/dpanshug/mcp-docs#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  }
 } 

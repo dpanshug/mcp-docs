@@ -10,7 +10,7 @@ Welcome to our documentation system! This guide will help you get up and running
 
 ## Overview
 
-This documentation MCP server provides seamless integration between your documentation and Cursor IDE, allowing AI assistants to access and search through your documentation in real-time.
+This MCP Docs server provides seamless integration between your documentation and Cursor IDE, allowing AI assistants to access and search through your documentation in real-time.
 
 ## Features
 

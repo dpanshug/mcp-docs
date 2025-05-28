@@ -1,12 +1,12 @@
 ---
 title: Cursor Integration Guide
-description: Step-by-step guide to integrate the documentation MCP server with Cursor IDE
+description: Step-by-step guide to integrate the MCP Docs server with Cursor IDE
 tags: [cursor, integration, setup]
 ---
 
 # Cursor Integration Guide
 
-This guide shows you how to integrate the Documentation MCP Server with Cursor IDE.
+This guide shows you how to integrate the MCP Docs Server with Cursor IDE.
 
 ## Quick Setup
 
@@ -18,8 +18,7 @@ Create a `.cursor/mcp.json` file **in your project** (not in this MCP server cod
 {
   "mcpServers": {
     "documentation": {
-      "command": "node",
-      "args": ["/path/to/documentation-mcp-server/build/index.js"],
+      "command": "mcp-docs",
       "env": {}
     }
   }
@@ -41,8 +40,7 @@ Add to your Cursor settings file (`~/.cursor/config/settings.json`):
   "mcp": {
     "servers": {
       "documentation": {
-        "command": "node",
-        "args": ["/path/to/documentation-mcp-server/build/index.js"],
+        "command": "mcp-docs",
         "env": {}
       }
     }
@@ -56,23 +54,22 @@ Add to your Cursor settings file (`~/.cursor/config/settings.json`):
 
 ## Detailed Setup Steps
 
-### 1. Install and Build the MCP Server
+### 1. Install the MCP Server
 
 ```bash
-# Clone or download this MCP server
-git clone <this-repo>
-cd documentation-mcp-server
+# Install globally via npm
+npm install -g mcp-docs
 
-# Install dependencies
+# Or clone and build for development
+git clone https://github.com/dpanshug/mcp-docs.git
+cd mcp-docs
 npm install
-
-# Build the server
 npm run build
 ```
 
 ### 2. Choose Your Configuration Method
 
-#### Project-Specific Setup
+#### Project-Specific Setup (If installed via npm)
 
 1. **In your actual project** (not this MCP server folder), create `.cursor/mcp.json`:
 
@@ -80,17 +77,30 @@ npm run build
 {
   "mcpServers": {
     "documentation": {
-      "command": "node",
-      "args": ["/full/path/to/documentation-mcp-server/build/index.js"],
+      "command": "mcp-docs",
       "env": {}
     }
   }
 }
 ```
 
-2. **Replace** `/full/path/to/documentation-mcp-server/` with the actual path where you installed this MCP server.
+#### Project-Specific Setup (If cloned/built locally)
 
-#### Global Setup
+```json
+{
+  "mcpServers": {
+    "documentation": {
+      "command": "node",
+      "args": ["/full/path/to/mcp-docs/build/index.js"],
+      "env": {}
+    }
+  }
+}
+```
+
+2. **Replace** `/full/path/to/mcp-docs/` with the actual path where you installed this MCP server.
+
+#### Global Setup (If installed via npm)
 
 1. Find your Cursor config file:
    - **macOS**: `~/.cursor/config/settings.json`
@@ -104,8 +114,23 @@ npm run build
   "mcp": {
     "servers": {
       "documentation": {
+        "command": "mcp-docs",
+        "env": {}
+      }
+    }
+  }
+}
+```
+
+#### Global Setup (If cloned/built locally)
+
+```json
+{
+  "mcp": {
+    "servers": {
+      "documentation": {
         "command": "node",
-        "args": ["/full/path/to/documentation-mcp-server/build/index.js"],
+        "args": ["/full/path/to/mcp-docs/build/index.js"],
         "env": {}
       }
     }
@@ -140,8 +165,9 @@ Once configured, you can ask Cursor:
 
 ### Server Not Starting
 1. **Check the path** in your configuration file
-2. **Verify the build** exists: `ls /path/to/documentation-mcp-server/build/index.js`
-3. **Test manually**: `node /path/to/documentation-mcp-server/build/index.js`
+2. **Verify the build** exists (if using local build): `ls /path/to/mcp-docs/build/index.js`
+3. **Test manually** (if using local build): `node /path/to/mcp-docs/build/index.js`
+4. **Check npm installation** (if using npm): `which mcp-docs`
 
 ### Cursor Not Connecting
 1. **Restart Cursor** completely
@@ -161,8 +187,7 @@ You can pass environment variables to customize behavior:
 {
   "mcpServers": {
     "documentation": {
-      "command": "node",
-      "args": ["/path/to/documentation-mcp-server/build/index.js"],
+      "command": "mcp-docs",
       "env": {
         "DEBUG": "true",
         "MAX_FILE_SIZE": "10MB"

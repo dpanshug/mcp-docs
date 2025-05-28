@@ -17,7 +17,7 @@ class DocumentationMCPServer {
   constructor() {
     this.server = new Server(
       {
-        name: "documentation-mcp-server",
+        name: "mcp-docs",
         version: "1.0.0",
       },
       {
@@ -360,7 +360,7 @@ class DocumentationMCPServer {
   async run() {
     const transport = new StdioServerTransport();
     await this.server.connect(transport);
-    console.error("Documentation MCP server running on stdio");
+    console.error("MCP Docs server running on stdio");
   }
 }
 

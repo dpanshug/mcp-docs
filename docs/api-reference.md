@@ -1,12 +1,12 @@
 ---
 title: API Reference
-description: Complete API reference for the documentation MCP server
+description: Complete API reference for the MCP Docs server
 tags: [api, reference]
 ---
 
 # API Reference
 
-This document describes all available tools and resources provided by the documentation MCP server.
+This document describes all available tools and resources provided by the MCP Docs server.
 
 ## Tools
 
