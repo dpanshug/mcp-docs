@@ -4,179 +4,62 @@ description: Step-by-step guide to integrate the MCP Docs server with Cursor IDE
 tags: [cursor, integration, setup]
 ---
 
-# Cursor Integration Guide
+# Cursor Integration
 
-This guide shows you how to integrate the MCP Docs Server with Cursor IDE.
+How to set up the MCP Docs server with Cursor.
 
-## Quick Setup
+## Setup
 
-### Option 1: Project-Specific Configuration (Recommended)
-
-Create a `.cursor/mcp.json` file **in your project** (not in this MCP server codebase):
+Create `~/.cursor/mcp.json` in your home directory:
 
 ```json
 {
   "mcpServers": {
     "documentation": {
-      "command": "mcp-docs",
-      "env": {}
+      "command": "mcp-docs"
     }
   }
 }
 ```
 
-**Benefits:**
-- Project-specific configuration
-- Team members get the same setup
-- Can be version controlled
-- Works with relative paths
+### If you built locally
 
-### Option 2: Global Configuration
-
-Add to your Cursor settings file (`~/.cursor/config/settings.json`):
-
-```json
-{
-  "mcp": {
-    "servers": {
-      "documentation": {
-        "command": "mcp-docs",
-        "env": {}
-      }
-    }
-  }
-}
-```
-
-**Benefits:**
-- Available in all projects
-- Single configuration
-
-## Detailed Setup Steps
-
-### 1. Install the MCP Server
-
-```bash
-# Install globally via npm
-npm install -g @dpanshug/mcp-docs
-
-# Or clone and build for development
-git clone https://github.com/dpanshug/mcp-docs.git
-cd mcp-docs
-npm install
-npm run build
-```
-
-### 2. Choose Your Configuration Method
-
-#### Project-Specific Setup (If installed via npm)
-
-1. **In your actual project** (not this MCP server folder), create `.cursor/mcp.json`:
-
-```json
-{
-  "mcpServers": {
-    "documentation": {
-      "command": "mcp-docs",
-      "env": {}
-    }
-  }
-}
-```
-
-#### Project-Specific Setup (If cloned/built locally)
+Use the full path to the built file:
 
 ```json
 {
   "mcpServers": {
     "documentation": {
       "command": "node",
-      "args": ["/full/path/to/mcp-docs/build/index.js"],
-      "env": {}
+      "args": ["/path/to/mcp-docs/build/index.js"]
     }
   }
 }
 ```
 
-2. **Replace** `/full/path/to/mcp-docs/` with the actual path where you installed this MCP server.
+## Usage
 
-#### Global Setup (If installed via npm)
+After setup, restart Cursor and you can ask:
 
-1. Find your Cursor config file:
-   - **macOS**: `~/.cursor/config/settings.json`
-   - **Linux**: `~/.config/cursor/settings.json`  
-   - **Windows**: `%APPDATA%\cursor\settings.json`
-
-2. Add the MCP configuration:
-
-```json
-{
-  "mcp": {
-    "servers": {
-      "documentation": {
-        "command": "mcp-docs",
-        "env": {}
-      }
-    }
-  }
-}
-```
-
-#### Global Setup (If cloned/built locally)
-
-```json
-{
-  "mcp": {
-    "servers": {
-      "documentation": {
-        "command": "node",
-        "args": ["/full/path/to/mcp-docs/build/index.js"],
-        "env": {}
-      }
-    }
-  }
-}
-```
-
-### 3. Restart Cursor
-
-Close and reopen Cursor completely for the changes to take effect.
-
-## Usage Examples
-
-Once configured, you can ask Cursor:
-
-### Local Documentation
-- *"Search for API authentication information"*
-- *"What documentation files are available?"*
-- *"Show me the content of the getting started guide"*
-
-### Online Documentation
-- *"Add online documentation from https://docs.stripe.com/api with name 'Stripe API'"*
-- *"Add GitHub README from https://raw.githubusercontent.com/user/repo/main/README.md"*
-- *"Refresh online documentation"*
-
-### Cross-Source Search
-- *"Find information about payment processing"* (searches both local and online docs)
-- *"Show me the latest API changes"*
-- *"Compare our authentication with industry standards"*
+- "Search my docs for authentication"
+- "Add docs from https://example.com/api"
+- "What documentation files do I have?"
+- "Show me the getting started guide"
 
 ## Troubleshooting
 
-### Server Not Starting
-1. **Check the path** in your configuration file
-2. **Verify the build** exists (if using local build): `ls /path/to/mcp-docs/build/index.js`
-3. **Test manually** (if using local build): `node /path/to/mcp-docs/build/index.js`
-4. **Check npm installation** (if using npm): `which mcp-docs`
+**Server won't start?**
+- Check the path in your config
+- Make sure you installed with `npm install -g @dpanshug/mcp-docs`
+- Try running `mcp-docs` in terminal to test
 
-### Cursor Not Connecting
-1. **Restart Cursor** completely
-2. **Check Developer Console** (`Cmd+Option+I` / `Ctrl+Shift+I`)
-3. **Look for MCP errors** in the console
+**Cursor won't connect?**
+- Restart Cursor completely
+- Check MCP settings in Cursor settings to see server status
 
-### No Documentation Found
-- The server automatically finds docs in common locations
-- Add your documentation directories manually: *"Add documentation source /path/to/docs with name 'My Docs'"*
+**No docs found?**
+- The server auto-finds docs in `./docs`, `./README.md`, etc.
+- Add custom paths: "Add documentation source /my/docs with name 'My Docs'"
 
 ## Configuration Options
 

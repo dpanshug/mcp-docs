@@ -77,12 +77,10 @@ export class DocumentationManager {
           if (stat.isDirectory()) {
             await this.addDocumentationSource(fullPath, path.basename(fullPath));
           } else if (docPath.endsWith(".md")) {
-            // Single markdown file
             await this.indexFile(fullPath);
           }
         }
       } catch (error) {
-        // Silently ignore missing paths
       }
     }
   }
@@ -325,6 +323,14 @@ export class DocumentationManager {
     this.watchers.set(source.path, watcher);
   }
 
+  /**
+   * Search through all the docs we've indexed. Pretty straightforward - just pass in 
+   * what you're looking for and it'll search through file names, content, descriptions, etc.
+   * 
+   * The scoring is simple: exact matches get 10 points, individual words get 1 point each.
+   * If it matches in the title or description, that's worth 5 bonus points.
+   * Online docs get a small boost since they're usually more up-to-date.
+   */
   async searchDocumentation(query: string, limit: number = 10): Promise<SearchResult[]> {
     const results: SearchResult[] = [];
     const queryLower = query.toLowerCase();
@@ -418,13 +424,11 @@ export class DocumentationManager {
   }
 
   dispose(): void {
-    // Clear all refresh timers
     for (const timer of this.refreshTimers.values()) {
       clearInterval(timer);
     }
     this.refreshTimers.clear();
 
-    // Close file watchers
     for (const watcher of this.watchers.values()) {
       watcher.close();
     }

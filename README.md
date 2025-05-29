@@ -5,83 +5,19 @@ A Model Context Protocol (MCP) server that provides seamless integration between
 ## 📦 Installation
 
 ```bash
-# Install globally (recommended)
 npm install -g @dpanshug/mcp-docs
-
-# Or install locally in your project
-npm install @dpanshug/mcp-docs
 ```
 
-After installation, the `mcp-docs` command will be available globally.
+## Setup
 
-## Features
+Add this to your Cursor settings (`.cursor/mcp.json`):
 
-- 🔍 **Real-time search**: Search through all documentation files using natural language queries
-- 📁 **File monitoring**: Automatically updates when documentation files change
-- 📄 **Multiple formats**: Supports Markdown, text, reStructuredText, and AsciiDoc files
-- 🏷️ **Metadata support**: Extracts and uses frontmatter metadata for better search results
-- 🌐 **Online documentation**: Fetch and index documentation from URLs (HTML pages, Markdown files)
-- 🔄 **Auto-refresh**: Automatically refresh online documentation at configurable intervals
-- 🔌 **Easy integration**: Simple setup with Cursor IDE
-
-## Supported Documentation Sources
-
-### Local Files
-- `./docs/` - Main documentation folder
-- `./README.md` - Project readme
-- `./documentation/` - Alternative doc folder
-- `./guides/` - Guides directory
-- `./wiki/` - Wiki directory
-
-### Online Sources
-- **GitHub/GitLab**: Direct links to README and documentation files
-- **Documentation websites**: HTML pages automatically converted to searchable text
-- **Team wikis**: Notion, Confluence, GitBook pages
-- **API documentation**: Swagger, Postman, vendor documentation sites
-- **Service docs**: AWS, Google Cloud, third-party service documentation
-
-## Quick Start
-
-### Option 1: Install from npm (Recommended)
-
-```bash
-# Install globally
-npm install -g @dpanshug/mcp-docs
-
-# Or install locally in your project
-npm install @dpanshug/mcp-docs
-```
-
-### Option 2: Clone and Build (For Development)
-
-```bash
-# Clone the repository
-git clone https://github.com/dpanshug/mcp-docs.git
-cd mcp-docs
-
-# Install dependencies
-npm install
-
-# Build the server
-npm run build
-```
-
-## Configuration
-
-### Configure Cursor
-
-Add the following to your Cursor settings (usually found in `~/.cursor/config/settings.json`):
-
-#### If installed globally via npm:
 ```json
 {
-  "mcp": {
-    "servers": {
+  "mcpServers": {
       "documentation": {
-        "command": "mcp-docs",
-        "env": {}
+        "command": "mcp-docs"
       }
-    }
   }
 }
 ```
@@ -89,165 +25,63 @@ Add the following to your Cursor settings (usually found in `~/.cursor/config/se
 #### If cloned/built locally:
 ```json
 {
-  "mcp": {
-    "servers": {
+  "mcpServers": {
       "documentation": {
         "command": "node",
         "args": ["/path/to/your/project/build/index.js"],
         "env": {}
       }
-    }
   }
 }
 ```
 
-#### If installed locally in your project:
-```json
-{
-  "mcp": {
-    "servers": {
-      "documentation": {
-        "command": "node",
-        "args": ["./node_modules/@dpanshug/mcp-docs/build/index.js"],
-        "env": {}
-      }
-    }
-  }
-}
-```
+## What it does
 
-### Start Using
+- Finds and indexes markdown files in common folders (`./docs`, `./README.md`, etc.)
+- Lets you add online documentation from URLs
+- Provides search across all your docs
+- Watches for file changes and updates automatically
 
-Once configured, you can use these capabilities in Cursor:
+## Usage
 
-#### Local Documentation
-- Search your documentation: "Search for information about API authentication"
-- Get file contents: "Show me the content of the getting started guide"
-- List available docs: "What documentation files are available?"
+Once configured, you can ask Cursor:
 
-#### Online Documentation
-- Add online docs: "Add online documentation from https://docs.stripe.com/api with name 'Stripe API'"
-- Search across all sources: "Find payment processing examples"
-- Refresh online content: "Refresh online documentation"
-- Manage sources: "List all online documentation sources"
+- "Search my docs for authentication examples"
+- "Show me the getting started guide" 
+- "Add docs from https://api.example.com/docs"
+- "What documentation files do I have?"
 
-## Configuration
-
-The server automatically detects common documentation directories and supports adding online sources on-demand.
-
-### Adding Online Documentation
-
-You can add online documentation sources in several ways:
+## Adding online docs
 
 ```
-# Add a GitHub README
-"Add online documentation from https://raw.githubusercontent.com/user/repo/main/README.md with name 'Project README'"
-
-# Add a documentation website with custom refresh interval
-"Add online documentation from https://docs.example.com with name 'API Docs' with refresh interval 30 minutes"
-
-# Add with specific content type
-"Add online documentation from https://notion.site/page with name 'Team Wiki' with content type html"
+"Add online documentation from https://docs.stripe.com/api with name 'Stripe API'"
 ```
 
-### Refresh Settings
-- **Default refresh**: 60 minutes
-- **Custom intervals**: 5 minutes to several hours
-- **Manual refresh**: Available via API
-- **Disable refresh**: Set interval to 0
+The server will fetch the page, convert HTML to markdown, and make it searchable. You can set refresh intervals if the docs change frequently.
 
-## Supported File Types
+## Supported files
 
-### Local Files
 - Markdown (`.md`, `.mdx`)
-- Plain text (`.txt`)
+- Plain text (`.txt`) 
 - reStructuredText (`.rst`)
 - AsciiDoc (`.adoc`)
 
-### Online Content
-- **HTML pages**: Automatically converted to Markdown
-- **Markdown files**: Used directly  
-- **Plain text**: Used as-is
-
-All files support frontmatter metadata extraction for enhanced search capabilities.
-
 ## Development
 
-### Run in Development Mode
-
 ```bash
-npm run dev
-```
-
-### Build for Production
-
-```bash
+git clone https://github.com/dpanshug/mcp-docs.git
+cd mcp-docs
+npm install
 npm run build
-npm start
 ```
 
-## Available Tools
+## Why use this?
 
-The MCP server provides these tools for interacting with documentation:
+Honestly, you can just paste URLs directly to LLM and it works fine. This is mainly useful if:
 
-### Local Documentation
-- `search_documentation` - Search through all documentation
-- `get_documentation_content` - Get content of specific files
-- `list_documentation_files` - List all available files
-- `add_documentation_source` - Add local documentation directories
-
-### Online Documentation
-- `add_online_documentation` - Add documentation from URLs
-- `refresh_online_documentation` - Manually refresh online sources
-- `remove_online_documentation` - Remove online sources
-- `list_online_sources` - List configured online sources
-
-## Examples
-
-### Common Use Cases
-
-```
-# Multi-source search
-"Find authentication examples" (searches local + online docs)
-
-# Specific source queries  
-"Show me the latest Stripe API documentation"
-
-# Cross-reference information
-"Compare our authentication with Auth0's recommendations"
-
-# Stay up-to-date
-"What's new in the AWS S3 documentation?"
-```
-
-### Popular Online Sources
-
-- **API Documentation**: Stripe, AWS, Google Cloud, GitHub API
-- **Framework Docs**: React, Vue, Angular official documentation  
-- **Service Docs**: Auth0, Firebase, Vercel, Netlify
-- **Team Resources**: Notion wikis, Confluence spaces, GitBook sites
-
-## API Reference
-
-See [docs/api-reference.md](./docs/api-reference.md) for complete API documentation.
-
-## Architecture
-
-The server consists of:
-
-- **DocumentationManager**: Handles file indexing, searching, and monitoring
-- **Online Documentation Handler**: Fetches, converts, and caches online content
-- **MCP Server**: Provides the protocol interface for Cursor integration
-- **File Watchers**: Real-time monitoring of local documentation changes
-- **Auto-refresh System**: Periodic updates of online documentation
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+- You have lots of local docs that change frequently
+- You want to aggregate multiple documentation sources
+- You're in an environment where you can't share URLs directly
 
 ## License
 

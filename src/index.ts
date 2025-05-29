@@ -8,7 +8,7 @@ import {
   ListToolsRequestSchema,
   ReadResourceRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
-import { DocumentationManager, type DocumentationFile } from "./documentation-manager.js";
+import { DocumentationManager, type DocumentationFile } from "./documentationManager.js";
 
 class DocumentationMCPServer {
   private server: Server;
@@ -317,7 +317,6 @@ class DocumentationMCPServer {
       }
     });
 
-    // List available resources
     this.server.setRequestHandler(ListResourcesRequestSchema, async () => {
       const files = await this.documentationManager.listDocumentationFiles();
       return {
@@ -330,7 +329,6 @@ class DocumentationMCPServer {
       };
     });
 
-    // Read resource content
     this.server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
       const uri = request.params.uri;
       

@@ -16,7 +16,7 @@
     "build": "tsc",
     "start": "node build/index.js",
     "dev": "tsx src/index.ts",
-    "test": "npm run build && node test-mcp-server.js",
+    "test": "npm run build && tsx testMcpServer.ts",
     "prepublishOnly": "npm run build",
     "prepack": "npm run build"
   },
