@@ -1,5 +1,7 @@
 # MCP Docs
 
+https://www.npmjs.com/package/@dpanshug/mcp-docs
+
 A Model Context Protocol (MCP) server that provides seamless integration between your documentation and Cursor IDE, allowing AI assistants to access and search through both **local and online documentation** in real-time.
 
 ## 📦 Installation
